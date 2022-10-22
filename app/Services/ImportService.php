@@ -4,7 +4,7 @@ namespace App\Services;
 
 use Sunra\PhpSimple\HtmlDomParser;
 
-class SettlementService
+class ImportService
 {
     public function getDistricts(): array
     {

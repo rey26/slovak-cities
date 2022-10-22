@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use App\Services\SettlementService;
+use App\Services\ImportService;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class SettlementServiceProvider extends ServiceProvider implements DeferrableProvider
+class ImportServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
      * Register services.
@@ -15,7 +15,7 @@ class SettlementServiceProvider extends ServiceProvider implements DeferrablePro
      */
     public function register()
     {
-        $this->app->singleton(SettlementService::class);
+        $this->app->singleton(ImportService::class);
     }
 
     /**
@@ -35,6 +35,6 @@ class SettlementServiceProvider extends ServiceProvider implements DeferrablePro
      */
     public function provides()
     {
-        return [SettlementService::class];
+        return [ImportService::class];
     }
 }
