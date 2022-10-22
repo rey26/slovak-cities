@@ -11,6 +11,11 @@ INSTALLATION
 1. generate encryption key `sail artisan key:generate`
 1. sync data with: `sail artisan data:import`
 
+TESTING
+
+1. run migrations on testing database `sail artisan migrate --env=testing`
+1. run tests `sail artisan test`
+
 USAGE
 
 1. to list cities visit [localhost](http://localhost) in web browser
