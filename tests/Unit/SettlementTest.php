@@ -33,4 +33,50 @@ class SettlementTest extends TestCase
         $this->assertNull($settlement->email);
         $this->assertEquals('www.test.com', $settlement->web_address);
     }
+
+    public function test_settlement_can_have_a_child()
+    {
+        $parent = Settlement::factory()->create();
+
+        Settlement::factory()->state(['parent_id' => $parent->id])->create();
+
+        $this->assertInstanceOf(Settlement::class, $parent->children->first());
+    }
+
+    public function test_settlement_can_have_a_parent()
+    {
+        $parent = Settlement::factory()->create();
+
+        Settlement::factory()->state(['parent_id' => $parent->id])->create();
+
+        $this->assertInstanceOf(Settlement::class, $parent->parent);
+    }
+
+    public function test_settlement_can_have_many_children()
+    {
+        $parent = Settlement::factory()->create();
+
+        Settlement::factory()->state(['parent_id' => $parent->id])->create();
+        Settlement::factory()->state(['parent_id' => $parent->id])->create();
+
+        $this->assertCount(2, $parent->children);
+    }
+
+    public function test_settlement_relationship_recursion()
+    {
+        $parent = Settlement::factory()->create();
+
+        $child = Settlement::factory()->state(['parent_id' => $parent->id])->create();
+        Settlement::factory()->state(['parent_id' => $child->id])->create();
+
+        $this->assertInstanceOf(Settlement::class, $parent->children->first());
+        $this->assertInstanceOf(Settlement::class, $child->children->first());
+    }
+
+    public function test_root_settlement_is_valid()
+    {
+        $root = Settlement::factory()->state(['parent_id' => null])->create();
+
+        $this->assertNull($root->parent);
+    }
 }
