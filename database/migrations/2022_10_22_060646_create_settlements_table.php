@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('settlements', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('settlements');
             $table->string('name')->index();
             $table->string('mayor_name');
             $table->string('city_hall_address');
