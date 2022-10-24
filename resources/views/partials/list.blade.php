@@ -21,8 +21,18 @@
                             </a>
                         </td>
                         <td>{{ $settlement->mayor_name }}</td>
-                        <td>{{ $settlement->web_address }}</td>
-                        <td>{{ $settlement->email }}</td>
+                        <td>
+                            @foreach($settlement->web_addresses as $web_address)
+                                <a href="https://{{ $web_address }}" target="_blank" rel="noopener noreferrer">
+                                    {{ $web_address }}
+                                </a>
+                            @endforeach
+                        </td>
+                        <td>
+                            @foreach($settlement->emails as $email)
+                                <a href="mailto:{{ $email }}">{{ $email }}</a>
+                            @endforeach
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

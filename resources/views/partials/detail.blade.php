@@ -42,9 +42,9 @@
                             Email:
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <a href="mailto:{{ $settlement->email }}">
-                                {{ $settlement->email }}
-                            </a>
+                            @foreach($settlement->emails as $email)
+                                <a href="mailto:{{ $email }}">{{ $email }}</a>
+                            @endforeach
                         </div>
                     </div>
                     <div class="row">
@@ -52,9 +52,11 @@
                             Web:
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <a href="https://{{ $settlement->web_address }}" target="_blank" rel="noopener noreferrer">
-                                {{ $settlement->web_address }}
-                            </a>
+                            @foreach($settlement->web_addresses as $web_address)
+                                <a href="https://{{ $web_address }}" target="_blank" rel="noopener noreferrer">
+                                    {{ $web_address }}
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </div>

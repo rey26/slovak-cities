@@ -13,6 +13,8 @@ class Settlement extends Model
 
     protected $guarded = ['id'];
 
+    protected $appends = ['emails', 'web_addresses'];
+
     public function parent(): BelongsTo
     {
         return $this->belongsTo(Settlement::class, 'parent_id')->with(['parent']);
@@ -21,5 +23,15 @@ class Settlement extends Model
     public function children(): HasMany
     {
         return $this->hasMany(Settlement::class, 'parent_id')->with(['children']);
+    }
+
+    public function getEmailsAttribute(): array
+    {
+        return explode(' ', $this->email);
+    }
+
+    public function getWebAddressesAttribute(): array
+    {
+        return explode(' ', $this->web_address);
     }
 }
