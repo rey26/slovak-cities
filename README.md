@@ -11,6 +11,7 @@ INSTALLATION
 1. run all table migrations using: `sail artisan migrate`
 1. generate encryption key `sail artisan key:generate`
 1. sync data with: `sail artisan data:import`
+1. update GPS coordinates `sail artisan data:geocode`
 
 TESTING
 
