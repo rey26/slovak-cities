@@ -23,5 +23,6 @@ USAGE
 
 TODO
 
+- save parent-children relationship between settlements (District and its settlements)
 - create front-end UI
 - create autocomplete search
