@@ -110,7 +110,7 @@ class ImportService
             mkdir($directory, 0777, true);
         }
 
-        return File::put($directory . $fileName, $contents) ? $directory . $fileName : null;
+        return File::put($directory . $fileName, $contents) ? $fileName : null;
     }
 
     private function getCoatOfArmsRemoteUri(Crawler $crawler, string $name): ?string
