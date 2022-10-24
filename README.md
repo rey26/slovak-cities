@@ -18,11 +18,21 @@ TESTING
 
 USAGE
 
-1. to list cities visit [localhost](http://localhost) in web browser
+1. to list cities visit [localhost/settlements](http://localhost/settlements) in web browser
 1. to access detailed view of a city or town click on a row with city name
+
+ISSUES
+
+- There is a known issue with folder permission when using laravel sail
+    1. enter root shell inside container `sail root-shell`
+    1. move one directory up `cd ..`
+    1. change owner of html folder `chown -R sail:sail html`
+    1. check if the change was successful `ls -la`
+    1. exit container `exit`
 
 TODO
 
 - save parent-children relationship between settlements (District and its settlements)
 - create front-end UI
 - create autocomplete search
+- delete unused coat-of-arms images with cron

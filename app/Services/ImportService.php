@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use Goutte\Client;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -34,15 +36,17 @@ class ImportService
     public function getSettlementDetail(string $url): array
     {
         $crawler = $this->client->request('GET', $url);
+        $name = $crawler->filter('td[class="obecmenuhead"]')->text();
 
         return [
-            'name' => $crawler->filter('td[class="obecmenuhead"]')->text(),
+            'name' => $name,
             'mayor_name' => $this->getTdValueByPreviousElement($crawler, 'Starosta:', 'Primátor:'),
             'city_hall_address' => $this->getCityHallAddress($crawler),
             'phone' => $this->getTdValueByPreviousElement($crawler, 'Tel:'),
             'fax' => $this->getTdValueByPreviousElement($crawler, 'Fax:'),
             'email' => $this->getTdValueByPreviousElement($crawler, 'Email:'),
             'web_address' => $this->getTdValueByPreviousElement($crawler, 'Web:'),
+            'coat_of_arms_path' => $this->getCoatOfArmsPath($crawler, $name),
         ];
     }
 
@@ -89,5 +93,38 @@ class ImportService
             ->text();
 
         return $street . ', ' . $postcodeAndTown;
+    }
+
+    private function getCoatOfArmsPath(Crawler $crawler, string $name): ?string
+    {
+        $remoteFilePath = $this->getCoatOfArmsRemoteUri($crawler, $name);
+
+        if ($remoteFilePath === null) {
+            return null;
+        }
+        $contents = file_get_contents($remoteFilePath);
+        $directory = app()->basePath() . '/storage/app/public/images/coat-of-arms/';
+        $fileName = Str::uuid()->toString() . '.' . Str::afterLast($remoteFilePath, '.');
+
+        if (is_dir($directory) === false) {
+            mkdir($directory, 0777, true);
+        }
+
+        return File::put($directory . $fileName, $contents) ? $directory . $fileName : null;
+    }
+
+    private function getCoatOfArmsRemoteUri(Crawler $crawler, string $name): ?string
+    {
+        $imageElement = $crawler->filter('img')
+            ->reduce(function (Crawler $node) use ($name) {
+                return $node->attr('alt') == 'Erb ' . $name;
+            })
+            ->first();
+
+        if ($imageElement) {
+            return $imageElement->attr('src');
+        }
+
+        return null;
     }
 }

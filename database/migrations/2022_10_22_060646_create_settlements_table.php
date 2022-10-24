@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('fax')->nullable();
             $table->string('email')->nullable();
             $table->string('web_address')->nullable();
+            $table->string('coat_of_arms_path')->nullable();
             $table->timestamps();
         });
     }

@@ -64,6 +64,7 @@
             <div class="col-md-6 col-sm-12">
                 <div class="jumbotron">
                     <h2 class="text-center">{{ $settlement->name }}</h2>
+                    <img src="{{ Storage::url($settlement->coat_of_arms_path) }}" alt="Erb {{ $settlement->name }}">
                 </div>
             </div>
         </div>

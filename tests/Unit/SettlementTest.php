@@ -20,7 +20,8 @@ class SettlementTest extends TestCase
             'mayor_name' => 'Mayor Name',
             'city_hall_address' => 'Address 1',
             'phone' => '+4219',
-            'web_address' => 'www.test.com'
+            'web_address' => 'www.test.com',
+            'coat_of_arms_path' => '/coa/name.jpg',
         ]);
 
         $this->assertNull($settlement->parent_id);
@@ -32,6 +33,7 @@ class SettlementTest extends TestCase
         $this->assertNull($settlement->fax);
         $this->assertNull($settlement->email);
         $this->assertEquals('www.test.com', $settlement->web_address);
+        $this->assertEquals('/coa/name.jpg', $settlement->coat_of_arms_path);
     }
 
     public function test_settlement_can_have_a_child()
