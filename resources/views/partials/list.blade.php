@@ -38,7 +38,7 @@
             </tbody>
         </table>
         <div class="d-flex justify-content-center">
-            {!! $settlements->appends(Request::except('page'))->render() !!}
+            {{ $settlements->links() }}
         </div>
     </div>
 @endsection
