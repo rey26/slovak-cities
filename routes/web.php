@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SettlementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::controller(SettlementController::class)
+    ->prefix('settlements')
+    ->group(function () {
+        Route::get('', 'index');
+        Route::get('{settlement}', 'show');
+    });
