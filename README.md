@@ -6,6 +6,7 @@
 
 INSTALLATION
 
+1. install composer dependencies `composer install`
 1. to run containers use `./vendor/bin/sail up -d` (you should create an alias in .bashrc for further use)
 1. run all table migrations using: `sail artisan migrate`
 1. generate encryption key `sail artisan key:generate`
