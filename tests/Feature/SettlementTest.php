@@ -13,9 +13,16 @@ class SettlementTest extends TestCase
      *
      * @return void
      */
-    public function test_basic_route_works_properly()
+    public function test_index_route_works_properly()
     {
-        $response = $this->get('/');
+        $response = $this->get('/settlements');
+
+        $response->assertStatus(200);
+    }
+
+    public function test_detail_route()
+    {
+        $response = $this->get('/settlements/1');
 
         $response->assertStatus(200);
     }
