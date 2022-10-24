@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use Goutte\Client;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -19,18 +19,23 @@ class ImportService
 
     public function getDistricts(): array
     {
-        return $this->client->request('GET', 'https://www.e-obce.sk/kraj/NR.html')
-            ->filter('a.okreslink')->each(function (Crawler $node) {
-                return $this->extractSettlementNameFromUrl($node->link()->getUri());
-            });
+        return Cache::remember('districts', 180, function () {
+            return $this->client->request('GET', 'https://www.e-obce.sk/kraj/NR.html')
+                ->filter('a.okreslink')->each(function (Crawler $node) {
+                    return $this->extractSettlementNameFromUrl($node->link()->getUri());
+                });
+        });
+
     }
 
     public function getSettlementsForDistrict(string $district): array
     {
-        return $this->client->request('GET', 'https://www.e-obce.sk/okres/' . $district . '.html')
-            ->filter('td[width="33%"]')->each(function (Crawler $node) {
-                return $node->children('a')->first()->link()->getUri();
-            });
+        return Cache::remember('district-' . $district, 180, function () use ($district) {
+            return $this->client->request('GET', 'https://www.e-obce.sk/okres/' . $district . '.html')
+                ->filter('td[width="33%"]')->each(function (Crawler $node) {
+                    return $node->children('a')->first()->link()->getUri();
+                });
+        });
     }
 
     public function getSettlementDetail(string $url): array

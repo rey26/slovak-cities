@@ -6,6 +6,7 @@ use App\Models\Settlement;
 use Geocoder\Provider\Nominatim\Nominatim;
 use Geocoder\StatefulGeocoder;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Cache;
 
 class GeocodeService
 {
@@ -21,9 +22,11 @@ class GeocodeService
 
     public function setCoordinatesForSettlement(Settlement $settlement): void
     {
-        $coordinates = $this->geocoder->geocode($settlement->city_hall_address)
-            ->first()
-            ->getCoordinates();
+        $coordinates = Cache::remember('settlement-' . $settlement->id, 60, function () use ($settlement) {
+            return $this->geocoder->geocode($settlement->city_hall_address)
+                ->first()
+                ->getCoordinates();
+        });
 
         $settlement->update(['lat' => $coordinates->getLatitude(), 'lon' => $coordinates->getLongitude()]);
     }

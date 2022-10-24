@@ -58,6 +58,14 @@
                         @endforeach
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <strong>Zemepisné súradnice:</strong>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        {{ $settlement->coordinates }}
+                    </div>
+                </div>
             </div>
             <div class="col-md-6 col-sm-12 p-5">
                 <div class="bg-white">
