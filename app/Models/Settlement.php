@@ -14,7 +14,7 @@ class Settlement extends Model
 
     protected $guarded = ['id'];
 
-    protected $appends = ['emails', 'web_addresses'];
+    protected $appends = ['emails', 'web_addresses', 'coordinates'];
 
     public function parent(): BelongsTo
     {
@@ -34,6 +34,14 @@ class Settlement extends Model
     public function getWebAddressesAttribute(): array
     {
         return explode(' ', $this->web_address);
+    }
+
+    public function getCoordinatesAttribute(): string
+    {
+        if (!$this->lat || !$this->lon) {
+            return '';
+        }
+        return $this->lat . ', ' . $this->lon;
     }
 
     public static function boot()

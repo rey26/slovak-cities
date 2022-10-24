@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('web_address')->nullable();
             $table->string('coat_of_arms_path')->nullable();
+            $table->string('lat')->nullable();
+            $table->string('lon')->nullable();
             $table->timestamps();
         });
     }

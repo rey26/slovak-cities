@@ -28,6 +28,8 @@ class SettlementFactory extends Factory
             'fax' => $this->faker->optional()->email(),
             'email' => $this->faker->email(),
             'web_address' => $this->faker->url(),
+            'lat' => $this->faker->latitude(),
+            'lon' => $this->faker->longitude(),
         ];
     }
 }

@@ -199,6 +199,7 @@ return [
          * Custom Service Providers
          */
         App\Providers\ImportServiceProvider::class,
+        App\Providers\GeocodeServiceProvider::class,
     ],
 
     /*
