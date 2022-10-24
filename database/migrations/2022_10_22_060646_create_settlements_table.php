@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('name')->index();
             $table->string('mayor_name');
             $table->string('city_hall_address');
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->string('fax')->nullable();
             $table->string('email')->nullable();
-            $table->string('web_address');
+            $table->string('web_address')->nullable();
             $table->timestamps();
         });
     }

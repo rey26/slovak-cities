@@ -37,7 +37,7 @@ class ImportService
 
         return [
             'name' => $crawler->filter('td[class="obecmenuhead"]')->text(),
-            'mayor_name' => $this->getTdValueByPreviousElement($crawler, 'Starosta:'),
+            'mayor_name' => $this->getTdValueByPreviousElement($crawler, 'Starosta:', 'Primátor:'),
             'city_hall_address' => $this->getCityHallAddress($crawler),
             'phone' => $this->getTdValueByPreviousElement($crawler, 'Tel:'),
             'fax' => $this->getTdValueByPreviousElement($crawler, 'Fax:'),
@@ -54,33 +54,38 @@ class ImportService
         );
     }
 
-    private function getTdValueByPreviousElement(Crawler $crawler, string $key): string
+    private function getTdValueByPreviousElement(Crawler $crawler, string $key, ?string $secondaryKey = null): ?string
     {
-        return $crawler->filter('td')
-            ->reduce(function (Crawler $node) use ($key) {
-                return $node->text() === $key;
-            })
-            ->first()
-            ->nextAll()
-            ->text();
+        $result = $crawler->filter('td')
+            ->reduce(function (Crawler $node) use ($key, $secondaryKey) {
+                if ($secondaryKey) {
+                    return $node->text() === $key || $node->text() === $secondaryKey;
+                } else {
+                    return $node->text() === $key;
+                }
+            });
+
+        return $result->count() > 0 ? $result->first()->nextAll()->text() : null;
     }
 
     private function getCityHallAddress(Crawler $crawler): string
     {
-        $street = $crawler->filter('td')
+        $email = $crawler->filter('td')
             ->reduce(function (Crawler $node) {
                 return $node->text() === 'Email:';
             })
-            ->first()
+            ->first();
+
+
+        $street = $email
             ->previousAll()
             ->text();
 
-        $postcodeAndTown = $crawler->filter('td')
-            ->reduce(function (Crawler $node) {
-                return $node->text() === 'Web:';
-            })
+        $postcodeAndTown = $email
+            ->closest('tr')
+            ->nextAll()
+            ->children()
             ->first()
-            ->previousAll()
             ->text();
 
         return $street . ', ' . $postcodeAndTown;
