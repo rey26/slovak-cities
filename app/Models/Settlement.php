@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Scout\Searchable;
 
 class Settlement extends Model
 {
     use HasFactory;
+    use Searchable;
 
     protected $guarded = ['id'];
 
@@ -55,5 +57,10 @@ class Settlement extends Model
                 }
             }
         });
+    }
+
+    public function toSearchableArray()
+    {
+        return $this->only('name');
     }
 }

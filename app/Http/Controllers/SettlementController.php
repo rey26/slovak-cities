@@ -28,7 +28,7 @@ class SettlementController extends Controller
     public function searchApi(Request $request): JsonResponse
     {
         return new JsonResponse([
-            'result' => Settlement::where('name', 'LIKE', $request->get('name') . '%')->paginate(10)->toArray(),
+            'result' => Settlement::search($request->get('name'))->paginate(10)->toArray(),
         ]);
     }
 }
