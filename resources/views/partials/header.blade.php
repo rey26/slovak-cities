@@ -1,7 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-5 col-sm-12">
-            <img src="{{ url('storage/assets/logo.png') }}" alt="Page logo" class="img img-responsive">
+            <a href="{{ url('/') }}">
+                <img src="{{ url('storage/assets/logo.png') }}" alt="Page logo" class="img img-responsive">
+            </a>
         </div>
         <div class="col-md-7 col-sm-12 mt-3">
             <div class="row">

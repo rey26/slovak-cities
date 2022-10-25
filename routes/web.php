@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(SettlementController::class)
     ->group(function () {
         Route::get('', 'search');
+        Route::post('', 'searchApi');
         Route::get('settlements', 'index');
         Route::get('settlements/{settlement}', 'show');
     });
