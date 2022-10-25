@@ -7,9 +7,11 @@
 INSTALLATION
 
 1. install composer dependencies `composer install`
+1. copy .env.example to .env `cp .env.example .env`
 1. to run containers use `./vendor/bin/sail up -d` (you should create an alias in .bashrc for further use)
-1. run all table migrations using: `sail artisan migrate`
 1. generate encryption key `sail artisan key:generate`
+1. change DB_HOST in .env to `DB_HOST=mysql`
+1. run all table migrations using: `sail artisan migrate`
 1. sync data with: `sail artisan data:import`
 1. update GPS coordinates `sail artisan data:geocode`
 
