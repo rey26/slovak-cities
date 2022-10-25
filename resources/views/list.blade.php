@@ -1,6 +1,7 @@
 @extends('partials/base')
 @section('content')
-    <table class="table table-bordered mb-5">
+<div class="container">
+    <table class="table table-bordered mb-5 table-responsive">
         <thead>
             <tr class="table-success">
                 <th scope="col">#</th>
@@ -39,4 +40,5 @@
     <div class="d-flex justify-content-center">
         {{ $settlements->links() }}
     </div>
+</div>
 @endsection
