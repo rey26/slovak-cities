@@ -1,7 +1,7 @@
 <div class="container">
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div class="row">
-            <div class="col-6 col-md">
+            <div class="col-xs-12 col-md-6 col-lg-3">
                 <h6 class="text-uppercase">Adresa a kontakt</h6>
                 <ul class="list-unstyled text-small">
                     <li><a class="text-muted" href="#">ŠÚKL</a></li>
@@ -24,7 +24,7 @@
                     <li><a class="text-muted" href="#">Národný portál zdravia</a></li>
                 </ul>
             </div>
-            <div class="col-6 col-md">
+            <div class="col-xs-12 col-sm-6 col-lg-3">
                 <h6 class="text-uppercase">O nás</h6>
                 <ul class="list-unstyled text-small">
                     <li><a class="text-muted" href="#">Dotazníky</a></li>
@@ -47,7 +47,7 @@
                     <li><a class="text-muted" href="#">Sťažnosti a petície</a></li>
                 </ul>
             </div>
-            <div class="col-6 col-md">
+            <div class="col-xs-12 col-sm-6 col-lg-3">
                 <h6 class="text-uppercase">Médiá</h6>
                 <ul class="list-unstyled text-small">
                     <li><a class="text-muted" href="#">Tlačové správy</a></li>
@@ -67,7 +67,7 @@
                     <li><a class="text-muted" href="#">Prehliadače formátov</a></li>
                 </ul>
             </div>
-            <div class="col-6 col-md">
+            <div class="col-xs-12 col-sm-6 col-lg-3">
                 <h6 class="text-uppercase">Drogové prekurzory</h6>
                 <ul class="list-unstyled text-small">
                     <li><a class="text-muted" href="#">Aktuality</a></li>
