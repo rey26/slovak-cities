@@ -6,6 +6,7 @@ use App\Models\Settlement;
 use App\Services\GeocodeService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use PhpParser\Node\Expr\Throw_;
 use Throwable;
 
 class DataGeocode extends Command
@@ -34,7 +35,11 @@ class DataGeocode extends Command
         try {
             Settlement::all()
                 ->each(function (Settlement $settlement) use ($geocodeService) {
-                    $geocodeService->setCoordinatesForSettlement($settlement);
+                    try {
+                        $geocodeService->setCoordinatesForSettlement($settlement);
+                    } catch (Throwable $t) {
+                        Log::error($t->getMessage());
+                    }
                 });
             return Command::SUCCESS;
         } catch (Throwable $t) {

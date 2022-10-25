@@ -25,7 +25,6 @@ class ImportService
                     return $this->extractSettlementNameFromUrl($node->link()->getUri());
                 });
         });
-
     }
 
     public function getSettlementsForDistrict(string $district): array

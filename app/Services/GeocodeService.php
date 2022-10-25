@@ -22,12 +22,14 @@ class GeocodeService
 
     public function setCoordinatesForSettlement(Settlement $settlement): void
     {
-        $coordinates = Cache::remember('settlement-' . $settlement->id, 60, function () use ($settlement) {
-            return $this->geocoder->geocode($settlement->city_hall_address)
-                ->first()
-                ->getCoordinates();
+        $coordinatesCollection = Cache::remember('settlement-' . $settlement->id, 60, function () use ($settlement) {
+            return $this->geocoder->geocode($settlement->city_hall_address);
         });
 
-        $settlement->update(['lat' => $coordinates->getLatitude(), 'lon' => $coordinates->getLongitude()]);
+        if ($coordinatesCollection->isEmpty() === false) {
+            $coordinates = $coordinatesCollection->first()->getCoordinates();
+
+            $settlement->update(['lat' => $coordinates->getLatitude(), 'lon' => $coordinates->getLongitude()]);
+        }
     }
 }
