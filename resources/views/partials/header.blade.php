@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-5 col-sm-12">
             <a href="{{ url('/') }}">
-                <img src="{{ url('storage/assets/logo.png') }}" alt="Page logo" class="img img-responsive">
+                <img src="{{ url('images/logo.png') }}" alt="Page logo" class="img img-responsive">
             </a>
         </div>
         <div class="col-md-7 col-sm-12 mt-3">

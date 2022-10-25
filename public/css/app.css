@@ -1,0 +1,18 @@
+.big-element {
+    padding: 10% 30%;
+}
+
+.big-element > h1 {
+    font-weight: normal;
+    font-size: 3.5em;
+    padding-bottom: 2%;
+}
+
+@media (max-width: 1200px) {
+    .big-element {
+        padding: 2.5% 7.5%;
+    }
+    .big-element > h1 {
+        font-size: 2em;
+    }
+}
