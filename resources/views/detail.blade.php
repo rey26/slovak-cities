@@ -1,4 +1,4 @@
-@extends('base')
+@extends('partials/base')
 @section('content')
     <div class="container">
         <h1 class="text-center">Detail obce</h1>
