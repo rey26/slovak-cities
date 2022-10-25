@@ -22,7 +22,8 @@ TESTING
 
 USAGE
 
-1. to list cities visit [localhost/settlements](http://localhost/settlements) in web browser
+1. visit homepage for settlements search [localhost](http://localhost)
+1. to list cities visit [localhost/settlements](http://localhost/settlements)
 1. to access detailed view of a city or town click on a row with city name
 
 ISSUES

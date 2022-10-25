@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::controller(SettlementController::class)
-    ->prefix('settlements')
     ->group(function () {
-        Route::get('', 'index');
-        Route::get('{settlement}', 'show');
+        Route::get('', 'search');
+        Route::get('settlements', 'index');
+        Route::get('settlements/{settlement}', 'show');
     });

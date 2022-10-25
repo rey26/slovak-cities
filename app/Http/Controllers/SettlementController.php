@@ -9,13 +9,18 @@ class SettlementController extends Controller
 {
     public function index()
     {
-        return view('partials.list')
+        return view('list')
             ->with('settlements', Settlement::paginate(10));
     }
 
     public function show(Settlement $settlement)
     {
-        return view('partials.detail')
+        return view('detail')
             ->with('settlement', $settlement);
+    }
+
+    public function search()
+    {
+        return view('search');
     }
 }
