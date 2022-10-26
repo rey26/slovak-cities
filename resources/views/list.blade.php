@@ -1,9 +1,9 @@
 @extends('partials/base')
 @section('content')
 <div class="container">
-    <table class="table table-bordered mb-5 table-responsive">
+    <table class="table mb-5 table-responsive">
         <thead>
-            <tr class="table-success">
+            <tr>
                 <th scope="col">#</th>
                 <th scope="col">Názov</th>
                 <th scope="col">Starosta/Primátor</th>
