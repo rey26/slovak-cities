@@ -26,4 +26,31 @@ class SettlementTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_search_page_works()
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+    }
+
+    public function test_search_endpoint_failure()
+    {
+        $response = $this->postJson('/', ['name' => 'Te']);
+
+        $response->assertStatus(422);
+        $response->assertJson([
+            'message' => 'The name must be at least 3 characters.'
+        ]);
+    }
+
+    public function test_search_endpoint()
+    {
+        $response = $this->postJson('/', ['name' => 'Tes']);
+
+        $response->assertStatus(200);
+        $response->assertJson([
+            'result' => [],
+        ]);
+    }
 }
