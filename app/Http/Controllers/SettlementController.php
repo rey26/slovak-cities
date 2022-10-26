@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchSettlementsRequest;
 use App\Models\Settlement;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class SettlementController extends Controller
 {
@@ -25,7 +25,7 @@ class SettlementController extends Controller
         return view('search');
     }
 
-    public function searchApi(Request $request): JsonResponse
+    public function searchApi(SearchSettlementsRequest $request): JsonResponse
     {
         return new JsonResponse([
             'result' => Settlement::search($request->get('name'))->paginate(10)->toArray(),
